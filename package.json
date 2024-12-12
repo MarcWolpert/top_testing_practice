@@ -1,0 +1,15 @@
+{
+	"name": "top_testing_practice",
+	"version": "1.0.0",
+	"main": "main.js",
+	"scripts": {
+		"test": "jest",
+		"watch": "jest --watch"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"jest": "^29.7.0"
+	}
+}
