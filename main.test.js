@@ -71,3 +71,11 @@ test('caesar cipher works overflow', () => {
 test('caesar cipher partway split', () => {
 	expect(main.caesarCipher('XYZ', 2)).toBe('ZAB');
 });
+
+test('caesar cipher mixed casing', () => {
+	expect(main.caesarCipher('aBcDe', 2)).toBe('cDeFg');
+});
+
+test('caesar cipher punctuation', () => {
+	expect(main.caesarCipher('aBc,De', 2)).toBe('cDe,Fg');
+});

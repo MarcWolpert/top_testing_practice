@@ -30,13 +30,12 @@ function caesarCipher(input, shift) {
 	let cipher = '';
 	for (char of input) {
 		let charCode = char.charCodeAt(0);
-		if (charCode > 122) {
-			continue;
-		}
-		if (charCode >= 91 && charCode <= 96) {
-			continue;
-		}
-		if (charCode < 65) {
+		if (
+			charCode < 65 ||
+			(charCode >= 91 && charCode <= 96) ||
+			charCode > 122
+		) {
+			cipher += char;
 			continue;
 		}
 		if (charCode < 91) {
@@ -64,7 +63,7 @@ function caesarCipher(input, shift) {
 			}
 			charCode += lowerBound;
 		}
-		cipher = cipher + String.fromCharCode(charCode);
+		cipher += String.fromCharCode(charCode);
 	}
 	return cipher;
 }
