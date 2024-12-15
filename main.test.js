@@ -79,3 +79,30 @@ test('caesar cipher mixed casing', () => {
 test('caesar cipher punctuation', () => {
 	expect(main.caesarCipher('aBc,De', 2)).toBe('cDe,Fg');
 });
+
+test('analyzeArray exists', () => {
+	expect(main.analyzeArray([1, 2, 3, 4, 5])).toStrictEqual({
+		average: 3,
+		min: 1,
+		max: 5,
+		length: 5,
+	});
+});
+
+test('analyzeArray works integers', () => {
+	expect(main.analyzeArray([1, 3, 5, 7, 9])).toStrictEqual({
+		average: 5,
+		min: 1,
+		max: 9,
+		length: 5,
+	});
+});
+
+test('analyzeArray works floats', () => {
+	expect(main.analyzeArray([1.5, 3.25, 5.775, 7.89, 9.92])).toStrictEqual({
+		average: 5.667,
+		min: 1.5,
+		max: 9.92,
+		length: 5,
+	});
+});
