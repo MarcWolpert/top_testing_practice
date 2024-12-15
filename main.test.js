@@ -45,9 +45,29 @@ test('calculator multiply works', () => {
 });
 
 test('caesar cipher exists', () => {
-	expect(main.caesarCipher('xyz', 3)).toBe('abc');
+	expect(main.caesarCipher('cde', 3)).toBe('fgh');
 });
 
 test('caesar cipher works on lowercase', () => {
 	expect(main.caesarCipher('abc', 5)).toBe('fgh');
+});
+
+test('caesar cipher works reverse', () => {
+	expect(main.caesarCipher('abc', -3)).toBe('xyz');
+});
+
+test('caesar cipher works uppercase', () => {
+	expect(main.caesarCipher('ABC', 3)).toBe('DEF');
+});
+
+test('caesar cipher works reverse uppercase', () => {
+	expect(main.caesarCipher('ABC', -3)).toBe('XYZ');
+});
+
+test('caesar cipher works overflow', () => {
+	expect(main.caesarCipher('XYZ', 3)).toBe('ABC');
+});
+
+test('caesar cipher partway split', () => {
+	expect(main.caesarCipher('XYZ', 2)).toBe('ZAB');
 });

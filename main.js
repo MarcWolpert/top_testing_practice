@@ -21,10 +21,11 @@ const Calculator = {
 	},
 };
 
+function cipherOverflow() {}
+function cipherUnderflow() {}
+
 function caesarCipher(input, shift) {
-	//65->90 for uppercase
-	let uppercaseModulo = 95 - 65;
-	//97->122 for lowercase
+	let uppercaseModulo = 90 - 65;
 	let lowercaseModulo = 122 - 97;
 	let cipher = '';
 	for (char of input) {
@@ -32,16 +33,36 @@ function caesarCipher(input, shift) {
 		if (charCode > 122) {
 			continue;
 		}
-		if (charCode === 96) {
+		if (charCode >= 91 && charCode <= 96) {
 			continue;
 		}
 		if (charCode < 65) {
 			continue;
 		}
-		if (charCode < 96) {
-			charCode = ((charCode - 65 + shift) % uppercaseModulo) + 65;
+		if (charCode < 91) {
+			const lowerBound = 65;
+			const isOverflow = charCode - lowerBound + shift > uppercaseModulo;
+			const isUnderflow = charCode - lowerBound + shift < 0;
+			charCode = charCode - lowerBound + shift;
+			if (isOverflow) {
+				charCode = (charCode % uppercaseModulo) - 1;
+			} else if (isUnderflow) {
+				charCode = uppercaseModulo + charCode + 1;
+			}
+			charCode += lowerBound;
 		} else if (charCode > 96) {
-			charCode = ((charCode - 97 + shift) % lowercaseModulo) + 97;
+			const lowerBound = 97;
+			const shiftBefore = charCode - lowerBound + shift;
+			const isOverflow = shiftBefore > uppercaseModulo;
+			const isUnderflow = shiftBefore < 0;
+			charCode = charCode - lowerBound + shift;
+			if (isOverflow) {
+				charCode = (charCode % uppercaseModulo) - 1;
+				charCode += 1;
+			} else if (isUnderflow) {
+				charCode = uppercaseModulo + charCode + 1;
+			}
+			charCode += lowerBound;
 		}
 		cipher = cipher + String.fromCharCode(charCode);
 	}
